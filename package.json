@@ -29,7 +29,7 @@
     "watch:link": "strapi-plugin watch:link"
   },
   "dependencies": {
-    "@strapi/design-system": "^2.0.0-rc.18",
+    "@strapi/design-system": "^2.0.0-rc.23",
     "@strapi/icons": "^2.0.0-rc.10",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
