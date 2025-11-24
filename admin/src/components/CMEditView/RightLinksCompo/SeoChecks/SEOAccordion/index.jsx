@@ -5,26 +5,35 @@ import { Information, CrossCircle, CheckCircle, WarningCircle } from '@strapi/ic
 import { qualityVerdict } from '../../../utils/checks';
 
 export const SEOAccordion = ({ title, status, component, label }) => {
-  const getIcon = () => {
+  const [iconConfig, setIconConfig] = React.useState({
+    icon: WarningCircle,
+    color: 'warning600',
+  });
+
+  React.useEffect(() => {
     switch (status?.qualityVerdict) {
       case qualityVerdict.good:
-        return CheckCircle;
+        setIconConfig({ icon: CheckCircle, color: 'success600' });
+        break;
       case qualityVerdict.improvements:
-        return WarningCircle;
-      // TODO update the design system to support icons like this
-      // <WarningCircle fill="warning600" />
+        setIconConfig({ icon: WarningCircle, color: 'warning600' });
+        break;
       case qualityVerdict.bad:
-        return CrossCircle;
+        setIconConfig({ icon: CrossCircle, color: 'danger600' });
+        break;
       default:
-        return WarningCircle;
+        setIconConfig({ icon: WarningCircle, color: 'warning600' });
+        break;
     }
-  };
+  }, [status?.qualityVerdict]);
 
   return (
     <Accordion.Root>
       <Accordion.Item value="acc-01">
         <Accordion.Header>
-          <Accordion.Trigger icon={getIcon()}>{title}</Accordion.Trigger>
+          <Accordion.Trigger iconProps={{ color: iconConfig.color }} icon={iconConfig.icon}>
+            {title}
+          </Accordion.Trigger>
           <Accordion.Actions>
             <IconButton label={label}>
               <Information />
