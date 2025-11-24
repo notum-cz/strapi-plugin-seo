@@ -1,3 +1,5 @@
+> ⚠️ **Disclaimer**: This repository has been archived and moved in the Strapi Community organization: https://github.com/strapi-community/strapi-plugin-seo
+
 # Strapi plugin SEO
 
 The official plugin to make your Strapi content SEO friendly
