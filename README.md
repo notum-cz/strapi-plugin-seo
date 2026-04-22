@@ -1,5 +1,3 @@
-> ⚠️ **Disclaimer**: This repository has been archived and moved in the Strapi Community organization: https://github.com/strapi-community/strapi-plugin-seo
-
 # Strapi plugin SEO
 
 The official plugin to make your Strapi content SEO friendly
@@ -17,13 +15,13 @@ To install this plugin, you need to add an NPM dependency to your Strapi applica
 
 ```sh
 # Using Yarn
-yarn add @strapi/plugin-seo
+yarn add @notum-cz/strapi-plugin-seo
 
 # Or using PNPM
-pnpm add @strapi/plugin-seo
+pnpm add @notum-cz/strapi-plugin-seo
 
 # Or using NPM
-npm install @strapi/plugin-seo
+npm install @notum-cz/strapi-plugin-seo
 ```
 
 ## How it works
@@ -43,7 +41,6 @@ From there you can get an overview of which content-types contains the SEO compo
 From any content manager view for a content-type that contains the SEO component, you'll be able to see a right-side card dedicated for the SEO plugin. From there you can see a quick SEO analysis and action for you to perform (opening preview, opening complete analysis details modal).
 
 **Note**: You'll need to fill your SEO component with data to be able to see the SERP preview, Social post preview and complete analysis.
-
 
 ## Configuration
 
