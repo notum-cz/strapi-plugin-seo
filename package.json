@@ -1,5 +1,5 @@
 {
-  "name": "@strapi/plugin-seo",
+  "name": "@notum-cz/plugin-seo",
   "version": "2.0.10",
   "description": "Make your Strapi content SEO friendly.",
   "keywords": [],
@@ -50,7 +50,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/strapi/strapi-plugin-seo.git"
+    "url": "https://github.com/notum-cz/strapi-plugin-seo.git"
   },
   "resolutions": {
     "yargs": "^17.2.1",
@@ -63,9 +63,9 @@
   },
   "maintainers": [
     {
-      "name": "Strapi Solutions SAS",
-      "email": "hi@strapi.io",
-      "url": "https://strapi.io"
+      "name": "Notum Technologies s.r.o.",
+      "email": "sales@notum.cz",
+      "url": "https://www.notum.tech"
     }
   ],
   "strapi": {
