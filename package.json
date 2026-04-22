@@ -61,6 +61,7 @@
     "email": "hi@strapi.io",
     "url": "https://strapi.io"
   },
+  "license": "MIT",
   "maintainers": [
     {
       "name": "Notum Technologies s.r.o.",
