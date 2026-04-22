@@ -1,5 +1,5 @@
 {
-  "name": "@notum-cz/plugin-seo",
+  "name": "@notum-cz/strapi-plugin-seo",
   "version": "2.0.10",
   "description": "Make your Strapi content SEO friendly.",
   "keywords": [],
