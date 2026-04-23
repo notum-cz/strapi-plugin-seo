@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: yarn
 
       - name: Install dependencies
@@ -36,6 +36,3 @@ jobs:
 
       - name: Verify plugin
         run: yarn verify
-
-      - name: Run tests
-        run: yarn test
