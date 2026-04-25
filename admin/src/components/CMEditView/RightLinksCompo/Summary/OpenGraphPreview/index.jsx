@@ -10,10 +10,12 @@ import { FacebookOGPreview } from './Facebook/index';
 import { TwitterOGPreview } from './X/index';
 import { LinkedInOGPreview } from './LinkedIn/index';
 
-export const OpenGraphPreview = ({ modifiedData }) => {
+export const OpenGraphPreview = ({ layout, modifiedData }) => {
   const { formatMessage } = useIntl();
 
-  const { openGraph } = modifiedData?.seo;
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === 'component' && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
+  const { openGraph } = seo;
 
   return (
     <Modal.Content labelledBy="title">

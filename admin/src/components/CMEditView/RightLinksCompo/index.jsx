@@ -7,10 +7,10 @@ import { Summary } from './Summary';
 
 export const SeoChecker = () => {
   const {
-    form: { values },
+    layout,
   } = useContentManagerContext();
 
-  if (values?.seo) {
+  if (Object.values(layout.attributes).some((attr) => attr.type === 'component' && attr.component === 'shared.seo')) {
     return <Summary />;
   }
 

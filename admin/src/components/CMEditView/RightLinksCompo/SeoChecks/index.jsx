@@ -20,16 +20,19 @@ import { getRichTextData } from '../../utils/getRichTextData';
 import { useIntl } from 'react-intl';
 import { getTrad } from '../../../../utils/getTrad';
 
-export const SeoChecks = ({ updatedAt, modifiedData, components, contentType, checks }) => {
+export const SeoChecks = ({ updatedAt, layout, modifiedData, components, contentType, checks }) => {
   const { formatMessage } = useIntl();
 
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === 'component' && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
+
   const { wordCount, keywordsDensity, emptyAltCount } = getRichTextData(
+    seo,
     modifiedData,
     components,
     contentType
   );
 
-  const seo = modifiedData?.seo ?? null;
   const hasSeo = seo && Object.keys(seo).length > 0;
 
   return (

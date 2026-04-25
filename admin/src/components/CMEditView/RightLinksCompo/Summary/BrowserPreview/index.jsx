@@ -13,10 +13,11 @@ import { Illo } from '../../../../HomePage/Main/EmptyComponentLayout/illo';
 
 import { getTrad } from '../../../../../utils/getTrad';
 
-export const BrowserPreview = ({ modifiedData }) => {
+export const BrowserPreview = ({ layout, modifiedData }) => {
   const { formatMessage } = useIntl();
 
-  const seo = get(modifiedData, 'seo', null);
+  const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === 'component' && attr.component === 'shared.seo')[0];
+  const seo = _.get(modifiedData, seoPropName, null);
   const metaTitle = get(seo, 'metaTitle', null);
   const metaDescription = get(seo, 'metaDescription', null);
   const keywords = get(seo, 'keywords', null);

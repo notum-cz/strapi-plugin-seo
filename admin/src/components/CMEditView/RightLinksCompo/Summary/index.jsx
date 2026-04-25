@@ -45,7 +45,7 @@ export const Summary = () => {
   const [localChecks, setLocalChecks] = React.useState({});
   const [checks, dispatch] = React.useReducer(reducer, initialState);
 
-  const { model, collectionType, id, form, contentType, components } = useContentManagerContext();
+  const { layout, model, collectionType, id, form, contentType, components } = useContentManagerContext();
   const { values: modifiedData } = form;
 
   const { metaTitle, metaDescription, openGraph } = modifiedData.seo;
@@ -56,10 +56,14 @@ export const Summary = () => {
     documentId: id,
   });
 
-  const getAllChecks = async (modifiedData, components, contentType) => {
+  const getAllChecks = async (layout, modifiedData, components, contentType) => {
     const { data: defaultSettings } = await getSettings();
 
+    const seoPropName = Object.entries(layout.attributes).find(([, attr]) => attr.type === 'component' && attr.component === 'shared.seo')[0];
+    const seo = _.get(modifiedData, seoPropName, null);
+
     const { wordCount, keywordsDensity, emptyAltCount } = getRichTextData(
+      seo,
       modifiedData,
       components,
       contentType
@@ -67,28 +71,28 @@ export const Summary = () => {
 
     let result = {
       ...(defaultSettings[contentType?.uid]?.seoChecks?.metaTitle && {
-        metaTitle: getMetaTitleCheckPreview(modifiedData),
+        metaTitle: getMetaTitleCheckPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.wordCount && {
         wordCount: getWordCountPreview(wordCount),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.metaRobots && {
-        metaRobots: metaRobotPreview(modifiedData),
+        metaRobots: metaRobotPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.openGraph && {
-        openGraph: openGraphPreview(modifiedData),
+        openGraph: openGraphPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.canonicalUrl && {
-        canonicalUrl: canonicalUrlPreview(modifiedData),
+        canonicalUrl: canonicalUrlPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.lastUpdatedAt && {
         lastUpdatedAt: lastUpdatedAtPreview(modifiedData),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.structuredData && {
-        structuredData: structuredDataPreview(modifiedData),
+        structuredData: structuredDataPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.metaDescription && {
-        metaDescription: getMetaDescriptionPreview(modifiedData),
+        metaDescription: getMetaDescriptionPreview(seo),
       }),
       ...(defaultSettings[contentType?.uid]?.seoChecks?.alternativeText && {
         alternativeText: getAlternativeTextPreview(emptyAltCount),
@@ -105,7 +109,7 @@ export const Summary = () => {
     const fetchChecks = async () => {
       if (!(JSON.stringify(localChecks) === JSON.stringify(checks))) {
         if (checks?.preview) {
-          const status = await getAllChecks(modifiedData, components, contentType);
+          const status = await getAllChecks(layout, modifiedData, components, contentType);
 
           dispatch({
             type: 'UPDATE_FOR_PREVIEW',
@@ -147,7 +151,7 @@ export const Summary = () => {
                 </Button>
               </Box>
             </Modal.Trigger>
-            <BrowserPreview modifiedData={modifiedData} />
+            <BrowserPreview layout={layout} modifiedData={modifiedData} />
           </Modal.Root>
         )}
 
@@ -163,7 +167,7 @@ export const Summary = () => {
                 </Button>
               </Box>
             </Modal.Trigger>
-            <OpenGraphPreview modifiedData={modifiedData} />
+            <OpenGraphPreview layout={layout} modifiedData={modifiedData} />
           </Modal.Root>
         )}
 
@@ -181,6 +185,7 @@ export const Summary = () => {
             </Box>
           </Modal.Trigger>
           <SeoChecks
+            layout={layout}
             updatedAt={document?.updatedAt ?? null}
             modifiedData={modifiedData}
             components={components}
