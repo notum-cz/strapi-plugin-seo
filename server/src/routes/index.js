@@ -1,7 +1,7 @@
-import { seoRoutes } from './seo';
-import { settingsRoutes } from './settings';
+import admin from './admin';
+import contentApi from './content-api';
 
 export default {
-  seo: seoRoutes,
-  settings: settingsRoutes,
+  admin,
+  'content-api': contentApi,
 };

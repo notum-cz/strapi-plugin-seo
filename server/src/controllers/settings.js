@@ -17,6 +17,7 @@ export const settingsController = ({ strapi }) => {
       ctx.throw(500, err);
     }
   };
+
   return {
     getSettings,
     setSettings,

@@ -83,3 +83,7 @@ Once you create your SEO component in the edit view inside the Content Manager, 
 - Manage the meta title & description of your content and preview it in SERP.
 - Manage your meta social tags (Facebook & Twitter) and preview your post.
 - Analyze your content a little deeper via an SEO analysis of your content.
+
+## LLMS.txt
+
+Since version 2.0.9, a new LLMS field is available on the main page of the plugin. This field has been added for you to manage the content of your llms.txt file. An endpoint is also accessible (`/api/seo/llms`) for your **frontend** to fetch the content of this field and to create the llms.txt in order to have an AI-readable content for your website. It offers a practical solution to help AI systems better understand and utilize web content, particularly for technical documentation and APIs.
