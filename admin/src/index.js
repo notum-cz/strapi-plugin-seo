@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { Search } from '@strapi/icons';
 
 import pluginPkg from '../../package.json';
@@ -30,7 +32,23 @@ export default {
     });
   },
   bootstrap(app) {
-    app.getPlugin('content-manager').injectComponent('editView', 'right-links', {
+    const cm = app.getPlugin('content-manager');
+    const addEditViewSidePanel = cm?.apis?.addEditViewSidePanel;
+
+    // Strapi 5 exposes a first-class side-panel API. Use it so the SEO summary
+    // renders as a proper panel in the edit-view panel stack instead of the
+    // legacy `right-links` injection zone, which mounts below every panel and
+    // looks visually detached. Append it last so it sits under "Information".
+    if (typeof addEditViewSidePanel === 'function') {
+      const SeoSidePanel = () => ({
+        title: 'SEO',
+        content: React.createElement(SeoChecker),
+      });
+      addEditViewSidePanel((panels) => [...panels, SeoSidePanel]);
+      return;
+    }
+
+    cm.injectComponent('editView', 'right-links', {
       name: 'SeoChecker',
       Component: SeoChecker,
     });
