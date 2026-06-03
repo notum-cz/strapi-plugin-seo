@@ -4,18 +4,37 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import pull from 'lodash/pull';
 
+// Custom-field identifiers that store richtext-equivalent content (a Markdown
+// or HTML string). The word counter and alt-text scanner only look at native
+// `richtext`/`blocks` attributes, so editors using a richtext custom field —
+// e.g. the popular CKEditor plugins — get a 0-word count and every entry is
+// flagged as under-length. Treat these as `richtext` for collection purposes.
+const RICHTEXT_LIKE_CUSTOM_FIELDS = new Set([
+  'plugin::ckeditor5.CKEditor',
+  'plugin::ckeditor.CKEditor',
+]);
+
+const matchesType = (fieldProperties, fieldType) => {
+  if (fieldProperties.type === fieldType) return true;
+  return (
+    fieldType === 'richtext' &&
+    fieldProperties.type === 'customField' &&
+    RICHTEXT_LIKE_CUSTOM_FIELDS.has(fieldProperties.customField)
+  );
+};
+
 // Utility function to collect fields based on a specific type (richtext, blocks, etc.)
 const collectFieldsByType = (contentType, components, fieldType) => {
   let fields = [];
 
   // Collect fields from the content type
   Object.entries(contentType.attributes).forEach(([field, fieldProperties]) => {
-    if (fieldProperties.type === fieldType) {
+    if (matchesType(fieldProperties, fieldType)) {
       fields.push({ name: field, field: null });
     } else if (fieldProperties.type === 'component') {
       Object.entries(components[fieldProperties.component].attributes).forEach(
         ([field2, fieldProperties2]) => {
-          if (fieldProperties2.type === fieldType) {
+          if (matchesType(fieldProperties2, fieldType)) {
             fields.push({ name: field, field: field2 });
           }
         }
@@ -26,7 +45,7 @@ const collectFieldsByType = (contentType, components, fieldType) => {
   // Collect fields from components
   Object.entries(components).forEach(([componentName, componentData]) => {
     Object.entries(componentData.attributes).forEach(([field, fieldProperties]) => {
-      if (fieldProperties.type === fieldType) {
+      if (matchesType(fieldProperties, fieldType)) {
         fields.push({ name: componentName, field });
       }
     });
