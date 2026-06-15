@@ -2,7 +2,14 @@
   "name": "@notum-cz/strapi-plugin-seo",
   "version": "2.0.12",
   "description": "Make your Strapi content SEO friendly.",
-  "keywords": [],
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "seo",
+    "strapi-seo",
+    "meta-tags",
+    "plugin"
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
@@ -31,7 +38,6 @@
   "dependencies": {
     "date-fns": "4.4.0",
     "lodash": "4.18.1",
-    "react-intl": "6.8.9",
     "showdown": "2.1.0"
   },
   "devDependencies": {
@@ -42,6 +48,7 @@
     "prettier": "3.8.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-intl": "6.8.9",
     "react-router-dom": "6.30.4",
     "styled-components": "6.4.2"
   },
@@ -51,6 +58,7 @@
     "@strapi/strapi": "^5.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-intl": "^6.0.0",
     "react-router-dom": "^6.0.0",
     "styled-components": "^6.0.0"
   },
@@ -58,6 +66,10 @@
     "type": "git",
     "url": "https://github.com/notum-cz/strapi-plugin-seo.git"
   },
+  "bugs": {
+    "url": "https://github.com/notum-cz/strapi-plugin-seo/issues"
+  },
+  "homepage": "https://github.com/notum-cz/strapi-plugin-seo#readme",
   "resolutions": {
     "prettier": "3.8.4"
   },
