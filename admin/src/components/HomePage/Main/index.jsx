@@ -15,21 +15,49 @@ import {
   Tr,
   Td,
   Tabs,
+  Textarea,
+  Button,
 } from '@strapi/design-system';
-import { Plus } from '@strapi/icons';
+import { Plus, Upload } from '@strapi/icons';
 
 import { Illo } from './EmptyComponentLayout/illo';
 import { SettingsModal } from './SettingsModal';
 
+import { useLLMSApi } from '../../../hooks/useLLMSApi';
+
 import { getTrad } from '../../../utils/getTrad';
 
 export const Main = ({ contentTypes }) => {
+  const { getLLMSContent, setLLMSContent } = useLLMSApi();
+
   const { formatMessage } = useIntl();
+  const [LLMSData, setLLMSData] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchLLMSContent = async () => {
+      const {
+        data: { content },
+      } = await getLLMSContent();
+
+      setLLMSData(content);
+    };
+
+    fetchLLMSContent();
+  }, []);
+
+  const handleChange = (event) => {
+    setLLMSData(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    await setLLMSContent({ content: LLMSData });
+  };
 
   const TabValues = {
     collectionTypes: 'collection-types',
     singleTypes: 'single-types',
     plugins: 'plugins',
+    llms: 'llms',
   };
 
   return (
@@ -57,6 +85,14 @@ export const Main = ({ contentTypes }) => {
               {formatMessage({
                 id: getTrad('SEOPage.tab.plugin-title'),
                 defaultMessage: 'Plugins',
+              })}
+            </Typography>
+          </Tabs.Trigger>
+          <Tabs.Trigger value={TabValues.llms}>
+            <Typography>
+              {formatMessage({
+                id: getTrad('SEOPage.tab.llms-title'),
+                defaultMessage: 'LLMS',
               })}
             </Typography>
           </Tabs.Trigger>
@@ -269,6 +305,27 @@ export const Main = ({ contentTypes }) => {
             </Tbody>
           </Table>
 
+          {/* END TABLE */}
+        </Tabs.Content>
+        <Tabs.Content value={TabValues.llms}>
+          {/* TABLE */}
+          <Box
+            padding={8}
+            hasRadius
+            borderColor="neutral150"
+            borderWidth="1px"
+            background="neutral0"
+          >
+            <Textarea
+              placeholder="This is a content placeholder"
+              name="content"
+              value={LLMSData}
+              onChange={handleChange}
+            />
+            <Button onClick={handleSubmit} startIcon={<Upload />} marginTop="4">
+              Save
+            </Button>
+          </Box>
           {/* END TABLE */}
         </Tabs.Content>
       </Tabs.Root>
