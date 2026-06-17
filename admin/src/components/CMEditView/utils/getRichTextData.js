@@ -170,12 +170,13 @@ const adjustIntersections = (data) => {
 
 /**
  * Main function to retrieve richtext and block field data and calculate word count and keyword density.
+ * @param {Object} seo - The SEO component.
  * @param {Object} modifiedData - The modified content data.
  * @param {Object} components - The components used in the content type.
  * @param {Object} contentType - The content type definition.
  * @returns {Object} - Contains word count and keyword density.
  */
-const getRichTextData = (modifiedData, components, contentType) => {
+const getRichTextData = (seo, modifiedData, components, contentType) => {
   // Retrieve richtext and block fields
   const { richTextFields, blockFields } = getRichTextAndBlocksFields(
     contentType,
@@ -193,7 +194,7 @@ const getRichTextData = (modifiedData, components, contentType) => {
   let keywordsDensity = {};
 
   // Extract keywords from SEO metadata
-  const seoKeywords = modifiedData?.seo?.keywords ?? '';
+  const seoKeywords = seo?.keywords ?? '';
   if (seoKeywords) {
     keywords = seoKeywords.toLowerCase().split(','); // Split keywords by commas
   }

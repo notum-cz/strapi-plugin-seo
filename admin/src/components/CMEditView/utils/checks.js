@@ -8,8 +8,8 @@ export const qualityVerdict = {
   bad: 'bad',
 };
 
-export const getMetaTitleCheckPreview = (modifiedData) => {
-  const metaTitle = get(modifiedData, 'seo.metaTitle');
+export const getMetaTitleCheckPreview = (seo) => {
+  const metaTitle = get(seo, 'metaTitle');
 
   let status = {
     message: '',
@@ -30,8 +30,8 @@ export const getMetaTitleCheckPreview = (modifiedData) => {
   return status;
 };
 
-export const getMetaDescriptionPreview = (modifiedData) => {
-  const metaDescription = get(modifiedData, 'seo.metaDescription');
+export const getMetaDescriptionPreview = (seo) => {
+  const metaDescription = get(seo, 'metaDescription');
 
   let status = {
     message: '',
@@ -139,8 +139,8 @@ export const getKeywordDensityPreview = (keywordsDensity) => {
   return status;
 };
 
-export const canonicalUrlPreview = (modifiedData) => {
-  const canonicalUrl = get(modifiedData, 'seo.canonicalURL');
+export const canonicalUrlPreview = (seo) => {
+  const canonicalUrl = get(seo, 'canonicalURL');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
@@ -179,8 +179,8 @@ export const lastUpdatedAtPreview = (modifiedData) => {
   return status;
 };
 
-export const metaRobotPreview = (modifiedData) => {
-  const metaRobots = get(modifiedData, 'seo.metaRobots');
+export const metaRobotPreview = (seo) => {
+  const metaRobots = get(seo, 'metaRobots');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
@@ -194,8 +194,8 @@ export const metaRobotPreview = (modifiedData) => {
   return status;
 };
 
-export const openGraphPreview = (modifiedData) => {
-  const openGraph = get(modifiedData, 'seo.openGraph');
+export const openGraphPreview = (seo) => {
+  const openGraph = get(seo, 'openGraph');
 
   let status = {
     message: '',
@@ -217,8 +217,8 @@ export const openGraphPreview = (modifiedData) => {
   return status;
 };
 
-export const structuredDataPreview = (modifiedData) => {
-  const structuredData = get(modifiedData, 'seo.structuredData');
+export const structuredDataPreview = (seo) => {
+  const structuredData = get(seo, 'structuredData');
   let status = {
     message: '',
     qualityVerdict: qualityVerdict.good,
