@@ -96,7 +96,7 @@ export const HomePage = React.memo(() => {
             defaultMessage: 'Information',
           })}
           subtitle={formatMessage({
-            id: getTrad('HomePage.info.information'),
+            id: getTrad('SEOPage.info.information'),
             defaultMessage:
               "When adding your SEO component, make sure to name it 'seo' and to include it in the root of your Content-Type.",
           })}

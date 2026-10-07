@@ -56,7 +56,7 @@ export const OpenGraphCheck = ({ openGraph, checks }) => {
   return (
     <SEOAccordion
       title={formatMessage({
-        id: getTrad('SEOModal.summary-title.meta-social'),
+        id: getTrad('SEOModal.summary-title.open-graph'),
         defaultMessage: 'OpenGraph Tags',
       })}
       status={checks.openGraph}

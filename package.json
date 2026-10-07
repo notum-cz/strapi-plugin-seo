@@ -31,6 +31,7 @@
   ],
   "scripts": {
     "build": "strapi-plugin build",
+    "test": "node --test test/*.test.js",
     "verify": "strapi-plugin verify",
     "watch": "strapi-plugin watch",
     "watch:link": "strapi-plugin watch:link"

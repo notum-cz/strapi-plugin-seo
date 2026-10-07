@@ -103,7 +103,7 @@ export const SettingsModal = ({ item }) => {
       <Modal.Trigger>
         <Button variant="tertiary" startIcon={<Cog />} onClick={() => setupModalSettings()}>
           {formatMessage({
-            id: getTrad('SEOPage.info.config'),
+            id: getTrad('SEOPage.info.settings'),
             defaultMessage: 'Settings',
           })}
         </Button>
@@ -133,7 +133,7 @@ export const SettingsModal = ({ item }) => {
                   defaultMessage: 'Information',
                 })}
                 subtitle={formatMessage({
-                  id: getTrad('HomePage.info.settings.information'),
+                  id: getTrad('SEOPage.info.settings.information'),
                   defaultMessage: 'Disable SEO checks for this specific content-type.',
                 })}
                 icon={<Information />}
